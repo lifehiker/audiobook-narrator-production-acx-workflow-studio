@@ -1,0 +1,272 @@
+// This is your Prisma schema file
+generator client {
+  provider        = "prisma-client-js"
+  binaryTargets   = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum ProjectStatus {
+  AUDITIONING
+  CONTRACTED
+  RECORDING
+  PROOFING
+  PICKUPS
+  DELIVERED
+  PAID
+  ARCHIVED
+}
+
+enum Platform {
+  ACX
+  FINDAWAY
+  DIRECT
+  PUBLISHER
+  OTHER
+}
+
+enum ContractType {
+  PFH
+  ROYALTY_SHARE
+  ROYALTY_SHARE_PLUS
+  FLAT_FEE
+  OTHER
+}
+
+enum PronunciationStatus {
+  NEEDS_RESEARCH
+  CONFIRMED
+  RECORDED
+}
+
+enum PickupStatus {
+  OPEN
+  RECORDED
+  SENT
+  APPROVED
+}
+
+enum PickupIssueType {
+  MISREAD
+  PRONUNCIATION
+  NOISE
+  PACING
+  MISSING_LINE
+  OTHER
+}
+
+enum AuditionStatus {
+  SAVED
+  SUBMITTED
+  SHORTLISTED
+  WON
+  LOST
+  NO_RESPONSE
+}
+
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  OVERDUE
+  PAID
+}
+
+enum Plan {
+  FREE_TRIAL
+  SOLO
+  PRO
+  STUDIO
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  passwordHash  String?
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts      Account[]
+  sessions      Session[]
+  projects      Project[]
+  auditions     Audition[]
+  subscription  Subscription?
+  reminderLogs  ReminderLog[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Subscription {
+  id                   String    @id @default(cuid())
+  userId               String    @unique
+  plan                 Plan      @default(FREE_TRIAL)
+  stripeCustomerId     String?
+  stripeSubscriptionId String?
+  stripePriceId        String?
+  stripeCurrentPeriodEnd DateTime?
+  status               String    @default("trialing")
+  trialEndsAt          DateTime?
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Project {
+  id                String        @id @default(cuid())
+  userId            String
+  title             String
+  author            String?
+  clientPublisher   String?
+  platform          Platform      @default(ACX)
+  contractType      ContractType  @default(PFH)
+  status            ProjectStatus @default(AUDITIONING)
+  wordCount         Int?
+  estimatedHours    Float?
+  dueDate           DateTime?
+  notes             String?
+  // Business fields
+  pfhRate           Float?
+  royaltyShareType  String?
+  contractDate      DateTime?
+  expectedPayment   Float?
+  paymentDueDate    DateTime?
+  rightsReversionDate DateTime?
+  royaltyNotes      String?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  user              User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  pronunciations    PronunciationEntry[]
+  characters        CharacterNote[]
+  pickups           PickupNote[]
+  invoices          Invoice[]
+}
+
+model PronunciationEntry {
+  id        String              @id @default(cuid())
+  projectId String
+  term      String
+  phonetic  String?
+  category  String?
+  source    String?
+  notes     String?
+  status    PronunciationStatus @default(NEEDS_RESEARCH)
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model CharacterNote {
+  id                String   @id @default(cuid())
+  projectId         String
+  name              String
+  voiceNotes        String?
+  accentNotes       String?
+  relationshipNotes String?
+  firstAppearance   String?
+  notes             String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model PickupNote {
+  id            String          @id @default(cuid())
+  projectId     String
+  chapter       String?
+  location      String?
+  issueType     PickupIssueType @default(MISREAD)
+  originalText  String?
+  correctedText String?
+  notes         String?
+  status        PickupStatus    @default(OPEN)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model Audition {
+  id            String         @id @default(cuid())
+  userId        String
+  title         String
+  author        String?
+  client        String?
+  platform      Platform       @default(ACX)
+  auditionDate  DateTime?
+  submittedDate DateTime?
+  rateTerms     String?
+  status        AuditionStatus @default(SAVED)
+  notes         String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Invoice {
+  id            String        @id @default(cuid())
+  projectId     String
+  invoiceNumber String?
+  amountCents   Int           @default(0)
+  sentDate      DateTime?
+  dueDate       DateTime?
+  paidDate      DateTime?
+  status        InvoiceStatus @default(DRAFT)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model ReminderLog {
+  id        String   @id @default(cuid())
+  userId    String
+  eventType String
+  eventDate String
+  sentAt    DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, eventType, eventDate])
+}

@@ -5,7 +5,7 @@
 - **App Name:** audiobook-narrator-production-acx-workflow-studio
 - **Repository:** audiobook-narrator-production-acx-workflow-studio
 - **Tech Stack:** Next.js 15 (App Router) + TypeScript + Tailwind + shadcn/ui
-- **Description:** A web app for freelance audiobook narrators to manage manuscript preparation, project-specific pronunciation dictionaries, sample reads, pickups, ACX auditions, contracts, invoices, and rights dates. It helps narrators keep both creative production details and business tracking in one project workspace.
+- **Description:** audiobook-narrator-production-acx-workflow-studio
 
 ---
 
