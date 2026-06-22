@@ -72,8 +72,9 @@ function LoginForm() {
             <div className="bg-red-50 border border-red-200 text-red-700 rounded px-3 py-2 text-sm">{error}</div>
           )}
           <div>
-            <Label>Email</Label>
+            <Label htmlFor="login-email">Email</Label>
             <Input
+              id="login-email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -83,8 +84,9 @@ function LoginForm() {
             />
           </div>
           <div>
-            <Label>Password</Label>
+            <Label htmlFor="login-password">Password</Label>
             <Input
+              id="login-password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}

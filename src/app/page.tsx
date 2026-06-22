@@ -48,7 +48,7 @@ export default function HomePage() {
               <Button size="lg" variant="outline" className="text-base px-8">View Pricing</Button>
             </Link>
           </div>
-          <p className="text-sm text-gray-400 mt-4">14-day free trial · 2 projects free forever</p>
+          <p className="text-sm text-gray-400 mt-4">14-day free trial · no credit card required</p>
         </div>
       </section>
 

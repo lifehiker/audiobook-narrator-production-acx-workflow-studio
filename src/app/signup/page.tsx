@@ -87,8 +87,9 @@ export default function SignupPage() {
                 <div className="bg-red-50 border border-red-200 text-red-700 rounded px-3 py-2 text-sm">{error}</div>
               )}
               <div>
-                <Label>Your Name</Label>
+                <Label htmlFor="signup-name">Your Name</Label>
                 <Input
+                  id="signup-name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Jane Smith"
@@ -96,8 +97,9 @@ export default function SignupPage() {
                 />
               </div>
               <div>
-                <Label>Email *</Label>
+                <Label htmlFor="signup-email">Email *</Label>
                 <Input
+                  id="signup-email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -107,8 +109,9 @@ export default function SignupPage() {
                 />
               </div>
               <div>
-                <Label>Password *</Label>
+                <Label htmlFor="signup-password">Password *</Label>
                 <Input
+                  id="signup-password"
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}

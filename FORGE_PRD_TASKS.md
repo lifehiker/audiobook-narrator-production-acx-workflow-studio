@@ -70,7 +70,7 @@ Implementation order: foundation -> data/auth -> core workflows -> secondary wor
 - [x] Track invoices per project and globally.
 - [x] Enforce trial/Solo/Pro/Studio active project limits.
 - [x] Provide sample/demo data option for onboarding.
-- [x] Verify key navigation, signup API, auth guard, export-capable pages, and guarded cron behavior through dev-server smoke tests; browser automation was unavailable in this environment.
+- [x] Verify key navigation, signup API, auth guard, export-capable pages, guarded cron behavior, browser signup/login, and project creation through dev-server smoke tests.
 
 ## Billing, Email, Storage, Analytics
 - [x] Stripe subscription checkout/portal/webhook code exists.
@@ -104,7 +104,7 @@ Implementation order: foundation -> data/auth -> core workflows -> secondary wor
 - [x] Run `npm run lint` and fix all failures.
 - [x] Run `npm run build` and fix all failures.
 - [x] Start dev server and ensure it does not crash.
-- [x] Inspect primary public/app pages through route smoke tests and component review; screenshot tooling was unavailable.
-- [x] Test key interactions: signup API, auth guard, public navigation routes, cron guard, Prisma runtime schema initialization, and build-time compilation of server actions.
+- [x] Inspect primary public/app pages through route smoke tests, Playwright screenshots, and component review.
+- [x] Test key interactions: signup/auto-login, project creation, auth guard, public navigation routes, cron guard, Prisma runtime schema initialization, standalone server startup, and build-time compilation of server actions.
 - [x] Create `FORGE_COMPLETION_AUDIT.md` mapping PRD requirements to implementation files/routes.
 - [x] Final response includes `FORGE_BUILD_COMPLETE` only after all feasible checks pass.

@@ -36,8 +36,10 @@
 - Route smoke tests: `/`, `/pricing`, `/templates`, `/templates/acx-pronunciation-sheet`, `/templates/audiobook-pickup-notes`, `/templates/acx-audition-tracker`, `/templates/audiobook-narrator-invoice-tracker`, `/templates/royalty-share-rights-reversion-tracker`, `/blog`, `/blog/best-software-for-audiobook-narration`, `/login`, and `/signup` returned 200.
 - Auth guard smoke test: `/app` returned a redirect to `/login?callbackUrl=%2Fapp`.
 - Signup API smoke test: created a local user with a trial subscription.
+- Browser interaction smoke test: Playwright created an account through `/signup`, auto-signed in, opened `/app`, submitted `/app/projects/new`, and verified the generated project detail page title.
+- Visual smoke test: Playwright screenshots were reviewed for `/`, mobile `/signup`, authenticated `/app`, `/app/projects/new`, and `/app/projects/[projectId]`; no layout overlap or professional-polish issues were found in the checked viewports.
 - Cron guard smoke test: invalid `x-cron-secret` returned 401.
 - Runtime DB initialization smoke test: `npx prisma db push --url file:/tmp/forge-prisma-smoke.db` created and synced a fresh SQLite database successfully.
+- Standalone runtime smoke test: `DATABASE_URL=file:/tmp/forge-standalone.db npx prisma db push` followed by `node .next/standalone/server.js` started on `http://localhost:3200`; `/`, `/login`, and `/signup` returned 200 and `/app` redirected as expected.
 - Standalone output check: `.next/standalone/server.js`, `.next/static`, and `public` exist after `npm run build`; Dockerfile copy paths match the generated layout and Next 16 standalone-output docs.
 - Docker build: attempted but blocked by Docker socket permission (`permission denied while trying to connect to the docker API`).
-- Screenshot visual review: blocked because this environment has no Chromium, Playwright, or Puppeteer binary installed. UI was reviewed through component/code inspection and route smoke tests.
