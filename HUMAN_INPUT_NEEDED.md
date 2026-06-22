@@ -5,6 +5,7 @@ The app runs locally without external credentials using SQLite and safe fallback
 ## Auth
 
 - `AUTH_SECRET`: A strong random secret for NextAuth.
+- `AUTH_TRUST_HOST`: Set to `1` when deployed behind Coolify or another reverse proxy.
 - `NEXTAUTH_URL`: The deployed application URL, for example `https://app.example.com`.
 - `NEXT_PUBLIC_APP_URL`: The deployed application URL used in redirects and email links.
 - `GOOGLE_CLIENT_ID`: Google OAuth client ID for Google login.
@@ -30,4 +31,4 @@ The app runs locally without external credentials using SQLite and safe fallback
 
 ## Production Database
 
-- `DATABASE_URL`: Production database URL. The checked-in local default is SQLite (`file:./dev.db`) for development and demo use.
+- `DATABASE_URL`: Production database URL. The checked-in local default is SQLite (`file:./dev.db`) for development/demo use, and the Docker runtime default is SQLite at `file:/data/app.db`.

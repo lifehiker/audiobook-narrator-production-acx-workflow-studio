@@ -16,6 +16,34 @@ const POSTS = [
     date: "May 20, 2025",
     readTime: "6 min read",
   },
+  {
+    slug: "best-software-for-audiobook-narration",
+    title: "Best Software for Audiobook Narration Project Management",
+    excerpt: "How narrators can choose tools for auditions, pronunciations, pickups, invoices, contracts, and rights dates.",
+    date: "June 8, 2025",
+    readTime: "7 min read",
+  },
+  {
+    slug: "how-to-track-audiobook-pickups",
+    title: "How to Track Audiobook Pickups Without Losing Context",
+    excerpt: "A practical pickup workflow for chapter, timestamp, issue type, correction text, recording status, and approval status.",
+    date: "June 12, 2025",
+    readTime: "5 min read",
+  },
+  {
+    slug: "how-to-build-an-acx-pronunciation-sheet",
+    title: "How to Build an ACX Pronunciation Sheet",
+    excerpt: "The fields every ACX narrator should track before recording: terms, phonetics, sources, categories, notes, and status.",
+    date: "June 16, 2025",
+    readTime: "6 min read",
+  },
+  {
+    slug: "pfh-vs-royalty-share-tracking-for-narrators",
+    title: "PFH vs Royalty Share Tracking for Narrators",
+    excerpt: "What to track for PFH, royalty share, and royalty share plus projects so contracts, invoices, and rights dates stay visible.",
+    date: "June 20, 2025",
+    readTime: "6 min read",
+  },
 ];
 
 export default function BlogPage() {

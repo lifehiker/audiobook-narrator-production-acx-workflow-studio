@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Download, BookOpen, AlertCircle, Mic2 } from "lucide-react";
+import { Download, BookOpen, AlertCircle, Mic2, FileText, CalendarClock } from "lucide-react";
 
 const TEMPLATES = [
   {
@@ -31,6 +31,24 @@ const TEMPLATES = [
     fields: ["Title", "Author", "Client/Publisher", "Platform", "Submitted Date", "Rate/Terms", "Status"],
     color: "bg-purple-50 text-purple-600",
   },
+  {
+    slug: "audiobook-narrator-invoice-tracker",
+    download: "/templates/audiobook-narrator-invoice-tracker.csv",
+    icon: FileText,
+    title: "Audiobook Narrator Invoice Tracker",
+    description: "A simple invoice tracker for PFH, flat fee, and direct audiobook projects with sent, due, paid, and overdue status fields.",
+    fields: ["Project", "Invoice #", "Amount", "Sent Date", "Due Date", "Paid Date", "Status"],
+    color: "bg-emerald-50 text-emerald-600",
+  },
+  {
+    slug: "royalty-share-rights-reversion-tracker",
+    download: "/templates/royalty-share-rights-reversion-tracker.csv",
+    icon: CalendarClock,
+    title: "Royalty Share and Rights Reversion Tracker",
+    description: "Track royalty share terms, contract dates, payment expectations, rights reversion windows, and reminder notes.",
+    fields: ["Project", "Contract Type", "Royalty Terms", "Contract Date", "Rights Reversion", "Reminder", "Notes"],
+    color: "bg-amber-50 text-amber-600",
+  },
 ];
 
 export default function TemplatesPage() {
@@ -44,7 +62,7 @@ export default function TemplatesPage() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {TEMPLATES.map((tpl) => (
             <Card key={tpl.slug} className="hover:shadow-md transition-shadow">
               <CardHeader>
