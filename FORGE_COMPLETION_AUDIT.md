@@ -5,7 +5,7 @@
 - Authentication: implemented by `src/auth.ts`, `src/app/api/auth/[...nextauth]/route.ts`, `src/app/api/auth/signup/route.ts`, `src/app/login/page.tsx`, `src/app/signup/page.tsx`, `src/proxy.ts`, and `src/lib/auth.ts`. Email/password works locally; Google OAuth is guarded by environment variables.
 - User account and subscription status: `prisma/schema.prisma`, `src/components/app/PlanBadge.tsx`, `src/app/(app)/app/billing/page.tsx`, `src/app/(app)/app/settings/page.tsx`, and `src/actions/account.ts`.
 - Project dashboard: `src/app/(app)/app/page.tsx` shows active projects, open pickups, overdue invoices, audition counts, onboarding, plan state, and recent projects.
-- Create/edit audiobook project: `src/app/(app)/app/projects/new/page.tsx`, `src/components/app/tabs/BusinessTab.tsx`, `src/actions/projects.ts`, and `src/lib/validations/project.ts`.
+- Create/edit audiobook project: `src/app/(app)/app/projects/new/page.tsx`, `src/components/app/tabs/BusinessTab.tsx`, `src/actions/projects.ts`, and `src/lib/validations/project.ts`. The create-project form uses associated labels for primary fields so keyboard, screen-reader, and browser-driven form entry work reliably.
 - Project list and status filters: `src/app/(app)/app/projects/page.tsx` and `src/components/app/ProjectStatusBadge.tsx`.
 - Pronunciation dictionary: `src/components/app/tabs/PronunciationsTab.tsx`, `src/actions/pronunciations.ts`, and `src/lib/export.ts`; includes add/edit/delete, status/category filters, search, copy, and CSV export.
 - Character/name consistency sheet: `src/components/app/tabs/CharactersTab.tsx` and `src/actions/characters.ts`; includes add/edit/delete and search.
@@ -31,15 +31,15 @@
 - `npm ci`: passed.
 - `npx prisma generate`: passed.
 - `npm run lint`: passed.
-- `npm run build`: passed.
+- `npm run build`: passed again on 2026-06-22T06:47:32Z after the create-project label fix.
 - Dev server: started at `http://localhost:3100`.
 - Route smoke tests: `/`, `/pricing`, `/templates`, `/templates/acx-pronunciation-sheet`, `/templates/audiobook-pickup-notes`, `/templates/acx-audition-tracker`, `/templates/audiobook-narrator-invoice-tracker`, `/templates/royalty-share-rights-reversion-tracker`, `/blog`, `/blog/best-software-for-audiobook-narration`, `/login`, and `/signup` returned 200.
 - Auth guard smoke test: `/app` returned a redirect to `/login?callbackUrl=%2Fapp`.
 - Signup API smoke test: created a local user with a trial subscription.
-- Browser interaction smoke test: Playwright created an account through `/signup`, auto-signed in, opened `/app`, submitted `/app/projects/new`, and verified the generated project detail page title.
+- Browser interaction smoke test: Playwright created an account through `/signup`, auto-signed in, opened `/app`, submitted `/app/projects/new` using label-based field selectors, and verified the generated project detail page title.
 - Visual smoke test: Playwright screenshots were reviewed for `/`, mobile `/signup`, authenticated `/app`, `/app/projects/new`, and `/app/projects/[projectId]`; no layout overlap or professional-polish issues were found in the checked viewports.
 - Cron guard smoke test: invalid `x-cron-secret` returned 401.
 - Runtime DB initialization smoke test: `npx prisma db push --url file:/tmp/forge-prisma-smoke.db` created and synced a fresh SQLite database successfully.
-- Standalone runtime smoke test: `DATABASE_URL=file:/tmp/forge-standalone.db npx prisma db push` followed by `node .next/standalone/server.js` started on `http://localhost:3200`; `/`, `/login`, and `/signup` returned 200 and `/app` redirected as expected.
+- Standalone runtime smoke test: `DATABASE_URL=file:/tmp/forge-standalone-verify.db npx prisma db push` followed by `node .next/standalone/server.js` started on `http://localhost:3200`; `/`, `/login`, `/signup`, and `/templates/acx-pronunciation-sheet` returned 200 and `/app` redirected as expected.
 - Standalone output check: `.next/standalone/server.js`, `.next/static`, and `public` exist after `npm run build`; Dockerfile copy paths match the generated layout and Next 16 standalone-output docs.
 - Docker build: attempted but blocked by Docker socket permission (`permission denied while trying to connect to the docker API`).

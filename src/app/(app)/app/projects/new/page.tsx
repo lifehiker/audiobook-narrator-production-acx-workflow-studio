@@ -69,24 +69,24 @@ export default function NewProjectPage() {
           <CardHeader><CardTitle>Project Details</CardTitle></CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <Label>Title *</Label>
-              <Input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder="Book title" required />
+              <Label htmlFor="project-title">Title *</Label>
+              <Input id="project-title" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder="Book title" required />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label>Author</Label>
-                <Input value={form.author} onChange={(e) => setForm({ ...form, author: e.target.value })} placeholder="Author name" />
+                <Label htmlFor="project-author">Author</Label>
+                <Input id="project-author" value={form.author} onChange={(e) => setForm({ ...form, author: e.target.value })} placeholder="Author name" />
               </div>
               <div>
-                <Label>Client / Publisher</Label>
-                <Input value={form.clientPublisher} onChange={(e) => setForm({ ...form, clientPublisher: e.target.value })} placeholder="Publisher or client" />
+                <Label htmlFor="project-client-publisher">Client / Publisher</Label>
+                <Input id="project-client-publisher" value={form.clientPublisher} onChange={(e) => setForm({ ...form, clientPublisher: e.target.value })} placeholder="Publisher or client" />
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label>Platform</Label>
+                <Label htmlFor="project-platform">Platform</Label>
                 <Select value={form.platform} onValueChange={(v) => setForm({ ...form, platform: v ?? "ACX" })}>
-                  <SelectTrigger><SelectValue /></SelectTrigger>
+                  <SelectTrigger id="project-platform"><SelectValue /></SelectTrigger>
                   <SelectContent>
                     <SelectItem value="ACX">ACX</SelectItem>
                     <SelectItem value="FINDAWAY">Findaway</SelectItem>
@@ -97,9 +97,9 @@ export default function NewProjectPage() {
                 </Select>
               </div>
               <div>
-                <Label>Status</Label>
+                <Label htmlFor="project-status">Status</Label>
                 <Select value={form.status} onValueChange={(v) => setForm({ ...form, status: v ?? "AUDITIONING" })}>
-                  <SelectTrigger><SelectValue /></SelectTrigger>
+                  <SelectTrigger id="project-status"><SelectValue /></SelectTrigger>
                   <SelectContent>
                     <SelectItem value="AUDITIONING">Auditioning</SelectItem>
                     <SelectItem value="CONTRACTED">Contracted</SelectItem>
@@ -115,21 +115,21 @@ export default function NewProjectPage() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label>Word Count</Label>
-                <Input type="number" value={form.wordCount} onChange={(e) => setForm({ ...form, wordCount: e.target.value })} placeholder="85000" />
+                <Label htmlFor="project-word-count">Word Count</Label>
+                <Input id="project-word-count" type="number" value={form.wordCount} onChange={(e) => setForm({ ...form, wordCount: e.target.value })} placeholder="85000" />
               </div>
               <div>
-                <Label>Estimated Hours</Label>
-                <Input type="number" step="0.1" value={form.estimatedHours} onChange={(e) => setForm({ ...form, estimatedHours: e.target.value })} placeholder="9.5" />
+                <Label htmlFor="project-estimated-hours">Estimated Hours</Label>
+                <Input id="project-estimated-hours" type="number" step="0.1" value={form.estimatedHours} onChange={(e) => setForm({ ...form, estimatedHours: e.target.value })} placeholder="9.5" />
               </div>
             </div>
             <div>
-              <Label>Due Date</Label>
-              <Input type="date" value={form.dueDate} onChange={(e) => setForm({ ...form, dueDate: e.target.value })} />
+              <Label htmlFor="project-due-date">Due Date</Label>
+              <Input id="project-due-date" type="date" value={form.dueDate} onChange={(e) => setForm({ ...form, dueDate: e.target.value })} />
             </div>
             <div>
-              <Label>Notes</Label>
-              <Textarea value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} rows={3} />
+              <Label htmlFor="project-notes">Notes</Label>
+              <Textarea id="project-notes" value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} rows={3} />
             </div>
           </CardContent>
         </Card>
@@ -139,9 +139,9 @@ export default function NewProjectPage() {
           <CardContent className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label>Contract Type</Label>
+                <Label htmlFor="project-contract-type">Contract Type</Label>
                 <Select value={form.contractType} onValueChange={(v) => setForm({ ...form, contractType: v ?? "PFH" })}>
-                  <SelectTrigger><SelectValue /></SelectTrigger>
+                  <SelectTrigger id="project-contract-type"><SelectValue /></SelectTrigger>
                   <SelectContent>
                     <SelectItem value="PFH">Per Finished Hour (PFH)</SelectItem>
                     <SelectItem value="ROYALTY_SHARE">Royalty Share</SelectItem>
@@ -152,37 +152,37 @@ export default function NewProjectPage() {
                 </Select>
               </div>
               <div>
-                <Label>PFH Rate ($/hr)</Label>
-                <Input type="number" step="0.01" value={form.pfhRate} onChange={(e) => setForm({ ...form, pfhRate: e.target.value })} placeholder="225.00" />
+                <Label htmlFor="project-pfh-rate">PFH Rate ($/hr)</Label>
+                <Input id="project-pfh-rate" type="number" step="0.01" value={form.pfhRate} onChange={(e) => setForm({ ...form, pfhRate: e.target.value })} placeholder="225.00" />
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label>Expected Payment ($)</Label>
-                <Input type="number" step="0.01" value={form.expectedPayment} onChange={(e) => setForm({ ...form, expectedPayment: e.target.value })} />
+                <Label htmlFor="project-expected-payment">Expected Payment ($)</Label>
+                <Input id="project-expected-payment" type="number" step="0.01" value={form.expectedPayment} onChange={(e) => setForm({ ...form, expectedPayment: e.target.value })} />
               </div>
               <div>
-                <Label>Royalty Share Type</Label>
-                <Input value={form.royaltyShareType} onChange={(e) => setForm({ ...form, royaltyShareType: e.target.value })} placeholder="e.g. 20% royalty" />
+                <Label htmlFor="project-royalty-share-type">Royalty Share Type</Label>
+                <Input id="project-royalty-share-type" value={form.royaltyShareType} onChange={(e) => setForm({ ...form, royaltyShareType: e.target.value })} placeholder="e.g. 20% royalty" />
               </div>
             </div>
             <div className="grid grid-cols-3 gap-4">
               <div>
-                <Label>Contract Date</Label>
-                <Input type="date" value={form.contractDate} onChange={(e) => setForm({ ...form, contractDate: e.target.value })} />
+                <Label htmlFor="project-contract-date">Contract Date</Label>
+                <Input id="project-contract-date" type="date" value={form.contractDate} onChange={(e) => setForm({ ...form, contractDate: e.target.value })} />
               </div>
               <div>
-                <Label>Payment Due</Label>
-                <Input type="date" value={form.paymentDueDate} onChange={(e) => setForm({ ...form, paymentDueDate: e.target.value })} />
+                <Label htmlFor="project-payment-due-date">Payment Due</Label>
+                <Input id="project-payment-due-date" type="date" value={form.paymentDueDate} onChange={(e) => setForm({ ...form, paymentDueDate: e.target.value })} />
               </div>
               <div>
-                <Label>Rights Reversion Date</Label>
-                <Input type="date" value={form.rightsReversionDate} onChange={(e) => setForm({ ...form, rightsReversionDate: e.target.value })} />
+                <Label htmlFor="project-rights-reversion-date">Rights Reversion Date</Label>
+                <Input id="project-rights-reversion-date" type="date" value={form.rightsReversionDate} onChange={(e) => setForm({ ...form, rightsReversionDate: e.target.value })} />
               </div>
             </div>
             <div>
-              <Label>Royalty Notes</Label>
-              <Textarea value={form.royaltyNotes} onChange={(e) => setForm({ ...form, royaltyNotes: e.target.value })} rows={2} />
+              <Label htmlFor="project-royalty-notes">Royalty Notes</Label>
+              <Textarea id="project-royalty-notes" value={form.royaltyNotes} onChange={(e) => setForm({ ...form, royaltyNotes: e.target.value })} rows={2} />
             </div>
           </CardContent>
         </Card>

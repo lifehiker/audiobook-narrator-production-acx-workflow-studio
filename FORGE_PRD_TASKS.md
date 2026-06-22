@@ -35,6 +35,7 @@ Implementation order: foundation -> data/auth -> core workflows -> secondary wor
 - [x] `/app` dashboard exists with project/reminder summary.
 - [x] `/app/projects` list exists with status filtering.
 - [x] `/app/projects/new` create project form exists.
+- [x] `/app/projects/new` form controls have associated labels for keyboard/screen-reader use and reliable browser automation.
 - [x] `/app/projects/[projectId]` detail workspace exists.
 - [x] Project detail includes overview/business/pronunciation/character/pickup/invoice workflows.
 - [x] `/app/auditions` audition tracker exists.
@@ -70,7 +71,7 @@ Implementation order: foundation -> data/auth -> core workflows -> secondary wor
 - [x] Track invoices per project and globally.
 - [x] Enforce trial/Solo/Pro/Studio active project limits.
 - [x] Provide sample/demo data option for onboarding.
-- [x] Verify key navigation, signup API, auth guard, export-capable pages, guarded cron behavior, browser signup/login, and project creation through dev-server smoke tests.
+- [x] Verify key navigation, signup API, auth guard, export-capable pages, guarded cron behavior, browser signup/login, label-based project creation, and project detail navigation through dev-server smoke tests.
 
 ## Billing, Email, Storage, Analytics
 - [x] Stripe subscription checkout/portal/webhook code exists.
@@ -105,6 +106,6 @@ Implementation order: foundation -> data/auth -> core workflows -> secondary wor
 - [x] Run `npm run build` and fix all failures.
 - [x] Start dev server and ensure it does not crash.
 - [x] Inspect primary public/app pages through route smoke tests, Playwright screenshots, and component review.
-- [x] Test key interactions: signup/auto-login, project creation, auth guard, public navigation routes, cron guard, Prisma runtime schema initialization, standalone server startup, and build-time compilation of server actions.
+- [x] Test key interactions: signup/auto-login, label-based project creation, auth guard, public navigation routes, cron guard, Prisma runtime schema initialization, standalone server startup, and build-time compilation of server actions.
 - [x] Create `FORGE_COMPLETION_AUDIT.md` mapping PRD requirements to implementation files/routes.
 - [x] Final response includes `FORGE_BUILD_COMPLETE` only after all feasible checks pass.
